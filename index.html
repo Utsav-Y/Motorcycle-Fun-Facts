@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorbike Fun Facts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            opacity: 0;
+            animation: fadeInSlideUp 0.5s forwards;
+            transition: transform 0.3s;
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fact-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #007BFF;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .fact-image:hover {
+            transform: scale(1.05) rotate(2deg); /* Slight zoom and rotation effect on image hover */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007BFF;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #007BFF, #0056b3);
+            color: white;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            box-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc; /* Neon glow effect */
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            animation: pulse 2s infinite; /* Button pulse animation */
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(270deg, #1a1a1a, #333333, #1a1a1a);
+                color: #f0f0f0;
+            }
+
+            .container {
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px solid #007BFF;
+            }
+
+            h1 {
+                color: #00ffcc;
+            }
+
+            button {
+                background: linear-gradient(to right, #00ffcc, #00cc99);
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Motorbike Fun Facts</h1>
+        <img id="factImage" src="" alt="Fun Fact Image" class="fact-image">
+        <p id="fact"></p>
+        <div class="spinner" id="spinner"></div> <!-- Loading spinner -->
+        <button id="factButton">Get a Fun Fact!</button>
+    </div>
+    <script>
+        const facts = [
+            {
+                text: "The original cafe racer culture in the UK was associated with 'ton-up boys,' who would race their bikes to reach speeds of 100 mph (160 km/h) between cafes.",
+                image: "https://lh3.googleusercontent.com/d/1KRYsmyuoLlarJETXDIr-AWPe65fvwR5E=w1000"
+            },
+            {
+                text: "Many cafe racers are built by enthusiasts who enjoy the DIY aspect of customizing their bikes, often using parts from different models to create something unique.",
+                image: "https://lh3.googleusercontent.com/d/1SHDdjSaAS05W3mkYRkY4DS6w5zvaraRo=w1000"
+            },
+            {
+                text: "The minimalist design of cafe racers often includes a lack of unnecessary components, making them lighter and more agile.",
+                image: "https://lh3.googleusercontent.com/d/1ITI3TPiuZiWjI8XaLla24BgFV7l5PpGf=w1000"
+            },
+            {
+                text: "Cafe racers have been featured in various films, including 'The Great Escape' and 'Easy Rider,' contributing to their iconic status in motorcycle culture.",
+                image: "https://lh3.googleusercontent.com/d/1P674jw789RgKn8XZDU1DldXzT2oIAEJb=w1000"
+            },
+            {
+                text: "Choppers became popular in the 1960s and were often built from surplus military bikes, leading to their distinctive elongated look.",
+                image: "https://lh3.googleusercontent.com/d/1hvHRwh41KrxFH0nDqDj9pCbBJD1_blLI=w1000"
+            },
+            {
+                text: "Motocross, a popular sport involving dirt bikes, originated in the UK and has grown into a global phenomenon with professional competitions.",
+                image: "https://lh3.googleusercontent.com/d/1qBkiRmCAgp8YbHGj37Ubdvojl-zHmfZq=w1000"
+            },
+            {
+                text: "Cruisers are designed for comfort, often featuring wide seats and forward foot controls, making them ideal for long-distance rides.",
+                image: "https://lh3.googleusercontent.com/d/1mgswpr50YZDT8Ptey2mUdleiiadc_t8d=w1000"
+            },
+            {
+                text: "Sport bikes are built for speed and agility, featuring powerful engines and aerodynamic designs.",
+                image: "https://lh3.googleusercontent.com/d/13t3IppyJwCMjlrh07AdOyDdChySHyE3a=w1000"
+            },
+            {
+                text: "Electric motorcycles are becoming more mainstream, with advancements in battery technology allowing for longer ranges and faster charging times.",
+                image: "https://lh3.googleusercontent.com/d/1yMIC81IN2RlPMgzAUQlT3mNNiintpdKH=w1000"
+            },
+            {
+                text: "Motorcycle riders often form tight-knit communities, sharing tips, organizing rides, and participating in events together.",
+                image: "https://lh3.googleusercontent.com/d/1NCekarW766JVfcrJiPL1MsDWzZ9N64nX=w1000"
+            }
+        ];
+
+        document.getElementById('factButton').addEventListener('click', function () {
+            const spinner = document.getElementById('spinner');
+            spinner.style.display = 'block'; // Show spinner
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            setTimeout(() => { // Simulate loading time
+                document.getElementById('fact').innerText = facts[randomIndex].text;
+                document.getElementById('factImage').src = facts[randomIndex].image;
+                spinner.style.display = 'none'; // Hide spinner
+            }, 1000); // 1 second loading time
+        });
+    </script>
+</body>
+
+</html>
